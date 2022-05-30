@@ -17,15 +17,24 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('info.index')">
+                    <x-nav-link :href="route('info.index')" :active="request()->routeIs('info.index')">
                         {{ __('Info') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('doctors')">
+                    <x-nav-link :href="route('doctors')" :active="request()->routeIs('doctors')">
                         {{ __('Doctors') }}
                     </x-nav-link>
                 </div>
+
+                @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                        {{ __('Admin page') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -55,7 +64,7 @@
                             </x-dropdown-link>
                         </form>
 
-                        <x-dropdown-link href="{{route('dashboard',  Auth::user()->name)}}">
+                        <x-dropdown-link href="{{route('profile.index',  Auth::user())}}">
                             {{ __('View profile') }}
                         </x-dropdown-link>
                     </x-slot>
