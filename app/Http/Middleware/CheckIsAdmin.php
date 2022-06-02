@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class is_admin
+class CheckIsAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,6 +17,11 @@ class is_admin
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = Auth::user();
+        if(!$user->isAdmin()){
+            session()->flash('warning', 'You are not an admin ');
+            return redirect()->route('dashboard');
+        }
         return $next($request);
     }
 }
