@@ -21,4 +21,6 @@ class InfoController extends Controller
     public function neck(){
         return view('info.types.neck');
     }
+
+
 }

@@ -10,7 +10,25 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     Admin page crud doctors <br>
-                    <a href ="{{route('dashboard')}}">Doctors</a>
+                    <table>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                        @foreach($doctors as $doctor)
+                            <tr>
+                                <td>{{$doctor->id}}</td>
+                                <td>{{$doctor->name}}</td>
+                                <td>{{$doctor->email}}</td>
+                                <td>sdfsdf</td>
+                            </tr>
+
+                        @endforeach
+                    </table>
+
+
                 </div>
             </div>
         </div>

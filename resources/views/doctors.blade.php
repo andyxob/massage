@@ -10,7 +10,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     List of doctors
+                    @foreach($doctors as $doctor)
+                        <div style="display: flex; flex-direction: column">
 
+                            <div>{{$doctor->name}}</div>
+                            <div>{{$doctor->email}}</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
