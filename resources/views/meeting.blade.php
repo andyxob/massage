@@ -20,6 +20,15 @@
                             @endforeach
                         </select>
 
+                        <p>select massage type </p>
+                        <select class="form-control mt-2">
+
+
+                            @foreach($massages as $massage)
+                                <option value="{{$massage->id}}"
+                                        selected>{{$massage->name}}</option>
+                            @endforeach
+                        </select>
 
                     </form>
                 </div>

@@ -14,7 +14,8 @@
                         <div style="display: flex; flex-direction: column">
 
                             <div>{{$doctor->name}}</div>
-                            <div>{{$doctor->email}}</div>
+                            <div>{{$doctor->surname}}</div>
+                            <div>{{$doctor->exp}}</div>
                         </div>
                     @endforeach
                 </div>

@@ -14,14 +14,16 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Surname</th>
+                            <th>Experience</th>
                             <th>Actions</th>
                         </tr>
                         @foreach($doctors as $doctor)
                             <tr>
                                 <td>{{$doctor->id}}</td>
                                 <td>{{$doctor->name}}</td>
-                                <td>{{$doctor->email}}</td>
+                                <td>{{$doctor->surname}}</td>
+                                <td>{{$doctor->exp}}</td>
                                 <td>sdfsdf</td>
                             </tr>
 
