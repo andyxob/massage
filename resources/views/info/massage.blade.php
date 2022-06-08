@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Info') }}
+            {{$massage->name}}
         </h2>
     </x-slot>
 
@@ -9,14 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
-
-
-                    @foreach($massages as $massage)
+                    <a href="{{route('info.index')}}">Back to massages page</a>
+                    <div style="display: flex; flex-direction: column">
                         <div>
-                            <a href="{{route('massage', $massage)}}">{{$massage->name}}</a>
+                            {{$massage->description}}
                         </div>
-                    @endforeach
+                        <div>
+                            Price :{{$massage->price}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

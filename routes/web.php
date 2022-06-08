@@ -26,9 +26,7 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('/index', [\App\Http\Controllers\InfoController::class, 'index'])->middleware(['auth'])->name('info.index');
 
         Route::group(['prefix'=>'massage', 'middleware'=>'auth'], function (){
-            Route::get('/massage1', [\App\Http\Controllers\InfoController::class, 'anticilulit'])->name('massage.anticilulite');
-            Route::get('/back', [\App\Http\Controllers\InfoController::class, 'back'])->name('massage.back');
-            Route::get('/neck', [\App\Http\Controllers\InfoController::class, 'neck'])->name('massage.neck');
+            Route::get('/{massage?}', [\App\Http\Controllers\InfoController::class, 'massage'])->name('massage');
         });
 
     });

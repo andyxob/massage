@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Massage;
 use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
     public function index (){
-        return view('info.index');
+        $massages = Massage::get();
+        return view('info.index', ['massages'=>$massages]);
     }
 
-    public function anticilulit(){
-        return view('info.types.massage1');
-    }
+    public function massage($massage){
+        $massage = Massage::where('id', $massage)->first();
 
-    public  function back(){
-        return view('info.types.back');
+        return view ('info.massage' , ['massage'=>$massage]);
     }
-
-    public function neck(){
-        return view('info.types.neck');
-    }
-
 
 }
