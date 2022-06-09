@@ -22,8 +22,8 @@ Route::group(['middleware'=>'auth'], function (){
     Route::group(['prefix'=>'doctor', 'middleware'=>'auth'], function (){
         Route::get('/', [\App\Http\Controllers\MainController::class, 'doctors'])->name('doctors');
 
-        Route::post('/like/{id}' , [\App\Http\Controllers\DoctorController::class, 'likeDoctor'])->name('doctor.like');
-        Route::post('/unlike/{id}', [\App\Http\Controllers\DoctorController::class, 'unlikeDoctor'])->name('doctor.unlike');
+       Route::get('/{id}/like', [\App\Http\Controllers\DoctorController::class, 'getLike'])->name('doctor.like');
+       Route::get('/{id}/unlike', [\App\Http\Controllers\DoctorController::class, 'unlike'])->name('doctor.unlike');
     });
 
 

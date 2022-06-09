@@ -11,4 +11,8 @@ class Doctor extends Model
     use HasFactory, Likeable;
 
     protected $fillable = ['name', 'surname', 'exp'];
+
+    public function likes(){
+        return $this->morphMany('App\Models\Like', 'likeable');
+    }
 }

@@ -17,7 +17,7 @@ class DoctorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->name(),
             'surname' => $this->faker->word(),
             'exp' => $this->faker->randomDigitNotNull()
         ];

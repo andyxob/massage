@@ -43,7 +43,16 @@ class User extends Authenticatable
     ];
 
 
+
     public function isAdmin(){
         return $this->is_admin === 1;
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Models\Like', 'user_id');
+    }
+
+    public function hasLikedDoctor(Doctor $doctor){
+        return (bool) $doctor->likes()->where('user_id', $this->id)->count();
     }
 }

@@ -4,24 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
 {
-    public function likeDoctor($id){
-        $doctor = Doctor::find($id)->first();
-        $doctor->like();
-        $doctor->save();
+    public function getLike($doctorId){
+        $doctor = Doctor::find($doctorId);
 
-        return redirect()->route('doctors');
+        if(! $doctor ) return redirect()->route('dashboard');
+
+        if(Auth::user()->hasLikedDoctor($doctor)){
+            return redirect()->back();
+        }
+
+        $doctor->likes()->create(['user_id'=>Auth::user()->id]);
+
+        return redirect()->back();
     }
 
-    public function unlikeDoctor($id){
-        $doctor= Doctor::find($id);
-        $doctor->unlike();
-        $doctor->save();
+    public function unlike($doctorId){
+        $doctor = Doctor::find($doctorId);
 
-        return redirect()->route('doctors');
+        if(! $doctor ) return redirect()->route('dashboard');
 
+        if(! Auth::user()->hasLikedDoctor($doctor)){
+            return redirect()->back();
+        }
+        $doctor ->likes()->delete(['user_id'=>Auth::user()->id]);
+
+        return redirect()->back();
 
     }
 }
