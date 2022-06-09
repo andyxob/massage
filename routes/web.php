@@ -43,7 +43,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'index']) ->middleware(['auth'])->name('profile.index');
     Route::group(['prefix'=>'admin', 'middleware'=>'is_admin'], function (){
         Route::get('/index' ,  [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
-        Route::get('/doctors/index', [\App\Http\Controllers\AdminController::class, 'doctors'])->name('admin.doctors.index');
+        Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class);
     });
 
 });

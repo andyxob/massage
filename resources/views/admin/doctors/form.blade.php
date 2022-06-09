@@ -1,9 +1,9 @@
 @extends('base')
 
 @section('title')
-    {{$user->name . '`s '. 'profile'}}
+    Add Doctor
 @endsection
 
 @section('content')
-    Profile page
+asdasdad
 @endsection
