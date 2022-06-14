@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -37,51 +38,61 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = $request->file('image')->store('doctors');
+        $params = $request->all();
+        $params['image'] = $path;
+        Doctor::create($params);
+        return redirect()->route('doctors.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Doctor $doctor)
     {
-        //
+        return view('admin.doctors.show', ['doctor'=>$doctor]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Doctor $doctor)
     {
-        //
+        return view('admin.doctors.form', ['doctor'=>$doctor]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Doctor $doctor)
     {
-        //
+        Storage::delete($doctor->image);
+        $path = $request->file('image')->store('doctors');
+        $params = $request->all();
+        $params['image'] = $path;
+        $doctor->update($params);
+        return redirect()->route('doctors.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+        return redirect()->route('doctors.index');
     }
 }
