@@ -3,9 +3,10 @@
 @section('title', 'Meeting doctor form')
 
 @section('content')
-    <form method="post">
+
+
         <p>Select doctor</p>
-        <select class="form-control">
+        <select name="doctor"  class="form-control">
 
 
             @foreach($doctors as $doctor)
@@ -14,7 +15,7 @@
         </select>
 
         <p>select massage type </p>
-        <select class="form-control mt-2">
+        <select name ="massage" class="form-control mt-2">
             @foreach($massages as $massage)
                 <option value="{{$massage->id}}">{{$massage->name}}</option>
             @endforeach
@@ -22,7 +23,7 @@
 
 
         <p>Select time</p>
-        <select class="form-control mt-2">
+        <select name="massage" class="form-control mt-2">
             @foreach($times as $time)
                 <option value="{{$time->id}}">{{$time->time}}</option>
             @endforeach
@@ -30,9 +31,9 @@
 
 
 
-    <x-button class="mt-2">
+    <a class="mt-2 btn btn-success" href="{{route('meeting.confirm', )}}">
         confirm
-    </x-button>
+    </a>
 
-    </form>
+
 @endsection

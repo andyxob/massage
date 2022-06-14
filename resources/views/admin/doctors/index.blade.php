@@ -19,13 +19,21 @@
                 <td>{{$doctor->name}}</td>
                 <td>{{$doctor->surname}}</td>
                 <td>{{$doctor->exp}}</td>
-                <td>sdfsdf</td>
+                <td>     <form action="{{route("doctors.destroy",$doctor)}}" method="post">
+                        <a href="{{route('doctors.show', $doctor)}}" type="button"
+                           class="btn btn-success">View</a>
+                        <a href="{{route('doctors.edit', $doctor)}}" type="button"
+                           class="btn btn-warning">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form></td>
             </tr>
         @endforeach
     </table>
 
 
     <div>
-        <a href="{{route('doctors.create')}}">Create</a>
+        <a class="btn btn-success" href="{{route('doctors.create')}}">Create Doctor</a>
     </div>
 @endsection

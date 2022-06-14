@@ -37,7 +37,10 @@ Route::group(['middleware'=>'auth'], function (){
 
     });
 
-    Route::get('/meet', [\App\Http\Controllers\MainController::class, 'meeting'])->name('meeting.index');
+    Route::group(['prefix'=>'meeting'], function (){
+        Route::get('/', [\App\Http\Controllers\MainController::class, 'meeting'])->name('meeting.index');
+        Route::get('/confirm' , [\App\Http\Controllers\MainController::class, 'confirm'])->name('meeting.confirm');
+    });
 
 
     Route::get('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');

@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use Conner\Likeable\Likeable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Doctor extends Model
 {
-    use HasFactory, Likeable;
+    use HasFactory;
 
-    protected $fillable = ['name', 'surname', 'exp'];
+    protected $fillable = ['name', 'surname', 'exp', 'image'];
 
     public function likes(){
         return $this->morphMany('App\Models\Like', 'likeable');

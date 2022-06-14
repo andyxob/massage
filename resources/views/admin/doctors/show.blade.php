@@ -1,4 +1,8 @@
-<div class="col-md-12">
+@extends('base')
+
+@section('title','Doctor '. $doctor->name)
+
+@section('content')
 
     <table class="table">
         <tbody>
@@ -18,14 +22,16 @@
             <td>Surname</td>
             <td>{{$doctor->surname}}</td>
         </tr>
-        <tr>
+        <tr
             <td>Exp</td>
             <td>{{$doctor->exp}}</td>
         </tr>
         <tr>
             <td>Image</td>
-            <td><img src="{{\Illuminate\Support\Facades\Storage::url($doctor->image)}}" height="250" width="250"></td>
+            <td><img src="{{\Illuminate\Support\Facades\Storage::url($doctor->image)}}" width="250" height="250"> </td>
         </tr>
         </tbody>
     </table>
-</div>
+
+@endsection
+

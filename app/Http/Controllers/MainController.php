@@ -7,6 +7,7 @@ use App\Models\Massage;
 use App\Models\Time;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PhpParser\Comment\Doc;
 
 class MainController extends Controller
 {
@@ -22,5 +23,10 @@ class MainController extends Controller
         $times = Time::get();
 
         return view('meeting', ['doctors'=>$doctors, 'massages' => $massages, 'times'=>$times]);
+    }
+
+    public function confirm(){
+
+        return redirect()->route('profile.index');
     }
 }
