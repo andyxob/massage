@@ -10,4 +10,8 @@ class Massage extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'price', 'description'];
+
+    public function sessions(){
+        return $this->hasMany('App\Models\Session');
+    }
 }

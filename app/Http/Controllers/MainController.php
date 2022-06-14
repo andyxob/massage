@@ -27,6 +27,8 @@ class MainController extends Controller
 
     public function confirm(){
 
+
+
         return redirect()->route('profile.index');
     }
 }

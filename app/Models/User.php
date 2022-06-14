@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function hasLikedDoctor(Doctor $doctor){
         return (bool) $doctor->likes()->where('user_id', $this->id)->count();
     }
+
+    public function sessions(){
+        return $this->hasMany('App\Models\Session');
+    }
 }

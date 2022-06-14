@@ -10,4 +10,8 @@ class Time extends Model
     use HasFactory;
 
     protected $fillable = ['time'];
+
+    public function session(){
+        return $this->hasOne('App\Models\Session');
+    }
 }

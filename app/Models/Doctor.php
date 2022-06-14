@@ -14,4 +14,8 @@ class Doctor extends Model
     public function likes(){
         return $this->morphMany('App\Models\Like', 'likeable');
     }
+
+    public function sessions(){
+        return $this->hasMany('App\Models\Session');
+    }
 }
