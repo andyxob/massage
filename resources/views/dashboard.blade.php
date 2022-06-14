@@ -3,5 +3,5 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    sdlksjdlfkj
+    <a href="{{route('meeting.index')}}">Meet a doctor</a>
 @endsection

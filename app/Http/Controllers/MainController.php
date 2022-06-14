@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\Massage;
+use App\Models\Time;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class MainController extends Controller
     public function meeting(){
         $doctors = Doctor::get();
         $massages = Massage::get();
+        $times = Time::get();
 
-        return view('meeting', ['doctors'=>$doctors, 'massages' => $massages]);
+        return view('meeting', ['doctors'=>$doctors, 'massages' => $massages, 'times'=>$times]);
     }
 }

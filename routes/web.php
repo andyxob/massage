@@ -40,7 +40,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::get('/meet', [\App\Http\Controllers\MainController::class, 'meeting'])->name('meeting.index');
 
 
-    Route::get('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'index']) ->middleware(['auth'])->name('profile.index');
+    Route::get('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::group(['prefix'=>'admin', 'middleware'=>'is_admin'], function (){
         Route::get('/index' ,  [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
         Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class);
