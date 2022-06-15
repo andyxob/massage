@@ -23,17 +23,26 @@
                 @method('PUT')
             @endisset
             @csrf
-            <input type="text" class="form-control mt-2" placeholder="Enter doctor name" name="name" id="name"
+                @error('name')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            <input type="text" class="form-control mt-2 mb-2" placeholder="Enter doctor name" name="name" id="name"
                    @isset($doctor) value="{{$doctor->name}}"@endisset>
 
-            <input type="text" class="form-control mt-2" placeholder="Enter doctor surname" name="surname" id="surname"
+                @error('surname')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            <input type="text" class="form-control mt-2 mb-2" placeholder="Enter doctor surname" name="surname" id="surname"
                    @isset($doctor) value="{{$doctor->surname}}"@endisset>
 
 
-            <input type="number" placeholder="Enter doctor exp" id="exp" name="exp" class="form-control mt-2"
+                @error('exp')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            <input type="number" placeholder="Enter doctor exp" id="exp" name="exp" class="form-control mt-2 mb-2"
                    @isset($doctor) value="{{$doctor->exp}}"@endisset>
 
-            <input type="file" id="image" name="image" class="form-control mt-2" >
+            <input type="file" id="image" name="image" class="form-control mt-2 mb-2" >
 
             <button type="submit" class="btn btn-success mt-2">@isset($doctor)Edit doctor @else Create doctor @endisset</button>
         </div>

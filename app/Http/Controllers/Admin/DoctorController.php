@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DoctorRequest;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -36,11 +37,15 @@ class DoctorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoctorRequest $request)
     {
-        $path = $request->file('image')->store('doctors');
-        $params = $request->all();
-        $params['image'] = $path;
+                $params = $request->all();
+        unset($params['image']);
+        if ($request->has('image')){
+            $path = $request->file('image')->store('doctors');
+            $params['image'] = $path;
+        }
+
         Doctor::create($params);
         return redirect()->route('doctors.index');
     }
@@ -51,8 +56,8 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor)
-    {
+    public function show(Doctor $doctor){
+        if (! $doctor) return redirect()->back();
         return view('admin.doctors.show', ['doctor'=>$doctor]);
     }
 
@@ -74,7 +79,7 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor)
+    public function update(DoctorRequest $request, Doctor $doctor)
     {
         Storage::delete($doctor->image);
         $path = $request->file('image')->store('doctors');

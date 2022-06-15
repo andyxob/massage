@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>Image</td>
-            <td><img src="{{\Illuminate\Support\Facades\Storage::url($doctor->image)}}" height="250" width="250"></td>
+            <td><img src="{{\Illuminate\Support\Facades\Storage::url($doctor->image)}}" height="250" width="250" alt="This doctor has no image"></td>
         </tr>
         </tbody>
     </table>

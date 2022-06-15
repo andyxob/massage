@@ -19,7 +19,7 @@ Route::group(['middleware'=>'auth'], function (){
     })->name('dashboard');
 
 
-    Route::group(['prefix'=>'doctor', 'middleware'=>'auth'], function (){
+    Route::group(['prefix'=>'doctor'], function (){
         Route::get('/', [\App\Http\Controllers\MainController::class, 'doctors'])->name('doctors');
 
        Route::get('/{id}/like', [\App\Http\Controllers\DoctorController::class, 'getLike'])->name('doctor.like');
@@ -47,6 +47,7 @@ Route::group(['middleware'=>'auth'], function (){
     Route::group(['prefix'=>'admin', 'middleware'=>'is_admin'], function (){
         Route::get('/index' ,  [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
         Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class);
+        Route::resource('massages', \App\Http\Controllers\Admin\MassageController::class);
     });
 
 });
