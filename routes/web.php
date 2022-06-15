@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware'=>['auth']], function (){
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
@@ -41,7 +41,6 @@ Route::group(['middleware'=>['auth']], function (){
         Route::get('/', [\App\Http\Controllers\MainController::class, 'meeting'])->name('meeting.index');
         Route::get('/confirm' , [\App\Http\Controllers\MainController::class, 'confirm'])->name('meeting.confirm');
     });
-
 
     Route::get('/profile/{user}', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
     Route::group(['prefix'=>'admin', 'middleware'=>'is_admin'], function (){

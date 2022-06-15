@@ -10,7 +10,7 @@
 
 
             @foreach($doctors as $doctor)
-                <option value="{{$doctor->id}}">{{$doctor->name}}</option>
+                <option value="{{$doctor->id}}">{{$doctor->name . " " .$doctor->surname}}</option>
             @endforeach
         </select>
 
