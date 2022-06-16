@@ -9,19 +9,21 @@ class Session extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'doctor_id', 'massage_id', 'time_id'];
+
     public function user(){
         return $this->hasOne('App\Models\User');
     }
 
     public function  time(){
-        return $this->hasOne('App\Models\Time');
+        return $this->belongsTo('App\Models\Time');
     }
 
     public function doctor(){
-        return $this->hasOne('App\Models\Doctor');
+        return $this->belongsTo('App\Models\Doctor');
     }
 
     public function massage(){
-        return $this->hasOne('App\Models\Massage');
+        return $this->belongsTo('App\Models\Massage');
     }
 }

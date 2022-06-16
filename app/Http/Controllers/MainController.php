@@ -4,31 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\Massage;
+use App\Models\Session;
 use App\Models\Time;
-use App\Models\User;
 use Illuminate\Http\Request;
-use PhpParser\Comment\Doc;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class MainController extends Controller
 {
-    public function doctors(){
+    public function doctors()
+    {
         $doctors = Doctor::get();
 
-        return view('doctors', ['doctors'=>$doctors]);
+        return view('doctors', ['doctors' => $doctors]);
     }
 
-    public function meeting(){
+    public function meeting()
+    {
         $doctors = Doctor::get();
+        $time = Carbon::now('Europe/Kiev');
+
         $massages = Massage::get();
         $times = Time::get();
 
-        return view('meeting', ['doctors'=>$doctors, 'massages' => $massages, 'times'=>$times]);
+        return view('meeting', ['doctors' => $doctors, 'massages' => $massages, 'times' => $times]);
     }
 
-    public function confirm(){
 
 
+    public function createMeeting(Request $request){
+//        dd($request);
+//
+//        Session::create($request->all());
 
-        return redirect()->route('profile.index');
+        $session = new Session();
+        $session->user_id = Auth::user()->id;
+        $session->doctor_id = $request->get('doctor');
+        $session->massage_id = $request->get('massage');
+        $session->time_id = $request->get('time');
+        $session->save();
+
+        return redirect()->route('profile.index', Auth::user());
     }
 }

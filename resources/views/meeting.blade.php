@@ -4,9 +4,11 @@
 
 @section('content')
 
-
+    <form method="post" action="{{route('meeting.create')}}">
+        @csrf
+        <input type="hidden" name="user_id" id="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
         <p>Select doctor</p>
-        <select name="doctor"  class="form-control">
+        <select name="doctor" id="doctor"  class="form-control">
 
 
             @foreach($doctors as $doctor)
@@ -15,25 +17,22 @@
         </select>
 
         <p>select massage type </p>
-        <select name ="massage" class="form-control mt-2">
+        <select name ="massage" id="massage" class="form-control mt-2">
             @foreach($massages as $massage)
                 <option value="{{$massage->id}}">{{$massage->name}}</option>
             @endforeach
         </select>
 
-
         <p>Select time</p>
-        <select name="massage" class="form-control mt-2">
+        <select name="time" id="time" class="form-control mt-2">
             @foreach($times as $time)
                 <option value="{{$time->id}}">{{$time->time}}</option>
             @endforeach
         </select>
 
+        <x-button>
+            Meet
+        </x-button>
 
-
-    <a class="mt-2 btn btn-success" href="{{route('meeting.confirm', )}}">
-        confirm
-    </a>
-
-
+    </form>
 @endsection
