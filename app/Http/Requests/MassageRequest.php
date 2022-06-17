@@ -26,7 +26,7 @@ class MassageRequest extends FormRequest
         return [
             'name'=>'required|min:4|max:64|alpha',
             'description'=>'required|min:7',
-            'price'=>'required|digits_between:0,250'
+            'price'=>'required|numeric|digits_between:0,250'
         ];
     }
 }
