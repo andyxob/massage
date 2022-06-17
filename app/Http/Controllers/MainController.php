@@ -27,15 +27,13 @@ class MainController extends Controller
         $massages = Massage::get();
         $times = Time::get();
 
+
         return view('meeting', ['doctors' => $doctors, 'massages' => $massages, 'times' => $times]);
     }
 
 
 
     public function createMeeting(Request $request){
-//        dd($request);
-//
-//        Session::create($request->all());
 
         $session = new Session();
         $session->user_id = Auth::user()->id;

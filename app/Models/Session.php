@@ -26,4 +26,8 @@ class Session extends Model
     public function massage(){
         return $this->belongsTo('App\Models\Massage');
     }
+
+    public function isDone(){
+        return $this->is_done === 1;
+    }
 }
