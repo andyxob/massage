@@ -30,4 +30,6 @@ class Session extends Model
     public function isDone(){
         return $this->is_done === 1;
     }
+
+
 }

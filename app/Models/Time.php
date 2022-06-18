@@ -14,4 +14,6 @@ class Time extends Model
     public function session(){
         return $this->hasOne('App\Models\Session');
     }
+
+
 }

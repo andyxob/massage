@@ -47,8 +47,10 @@
         @error('time')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
+        @if(count($times) != 0)
             <p>Select time</p>
             <select name="time" id="time" class="form-control mt-2">
+
                 @foreach($times as $time)
 
 
@@ -56,13 +58,18 @@
                             value="{{$time->id}}">{{\Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('h:i A')}}</option>
 
                 @endforeach
+
+                    <x-button class="mt-2">
+                        Meet
+                    </x-button>
             </select>
+        @else
+            skg;djfgkdjgf
+        @endif
 
 
 
-        <x-button class="mt-2">
-            Meet
-        </x-button>
+
 
     </form>
 @endsection
