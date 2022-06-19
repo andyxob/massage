@@ -59,12 +59,14 @@
 
                 @endforeach
 
-                    <x-button class="mt-2">
-                        Meet
-                    </x-button>
+
             </select>
+
+            <x-button class="mt-2">
+                Meet
+            </x-button>
         @else
-            skg;djfgkdjgf
+            Not today
         @endif
 
 

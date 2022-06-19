@@ -8,10 +8,13 @@
     <a href="{{route('info.index')}}">Back to massages page</a>
     <div style="display: flex; flex-direction: column">
         <div>
-            {{$massage->description}}
+            Name: {{$massage->description}}
         </div>
         <div>
             Price :{{$massage->price}}
+        </div>
+        <div>
+            Payment : {{$massage->payment_description}}
         </div>
     </div>
 @endsection

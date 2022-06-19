@@ -17,7 +17,7 @@ class TimeFactory extends Factory
     public function definition()
     {
         return [
-            'time' => '18:00:00'
+            'time' => "18:00:00"
         ];
     }
 }
