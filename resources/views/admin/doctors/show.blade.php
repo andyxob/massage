@@ -22,9 +22,9 @@
             <td>Surname</td>
             <td>{{$doctor->surname}}</td>
         </tr>
-        <tr
+        <tr>
             <td>Exp</td>
-            <td>{{$doctor->exp}}</td>
+            <td>{{$doctor->exp}} {{Str::plural('year', $doctor->exp )}}</td>
         </tr>
         <tr>
             <td>Image</td>

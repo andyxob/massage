@@ -33,6 +33,5 @@ class DoctorController extends Controller
         $doctor ->likes()->delete(['user_id'=>Auth::user()->id]);
 
         return redirect()->back();
-
     }
 }

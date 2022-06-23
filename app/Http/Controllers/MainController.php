@@ -22,10 +22,26 @@ class MainController extends Controller
 
     public function meeting()
     {
+        $now = Carbon::now('Europe/Kiev');
+
+        $times = Time::all();
+
+        foreach ($times as $time){
+            $time->is_banned = 0;
+            $time->save();
+        }
+
+        $ban_times = Time::all();
+        foreach ($ban_times as $time ){
+            if ($time->time < $now->toTimeString()){
+                $time->is_banned=1;
+                $time->save();
+            }
+        }
 
         $sessions =  Session::all();
         foreach ($sessions as $session){
-            if($session->date < Carbon::now('Europe/Kiev')->toDateString() && $session->time->time < Carbon::now('Europe/Kiev')->toTimeString() && $session->isDone()){
+            if($session->date < $now->toDateString() && $session->time->time < $now->toTimeString() && $session->isDone()){
                 $time = Time::where('id', $session->time_id)->first();
                 $time->is_banned = 0;
                 $time->save();
@@ -37,26 +53,16 @@ class MainController extends Controller
 //        dd($time->toTimeString());
         $massages = Massage::get();
 
-        $now = Carbon::now('Europe/Kiev');
-
-
-        $ban_times = Time::all();
-        foreach ($ban_times as $time ){
-            if ($time->time < $now->toTimeString()){
-                $time->is_banned=1;
-                $time->save();
-            }
-        }
-
-
-
-
         $times = Time::where('is_banned', 0)->get();
 
         return view('meeting', ['doctors' => $doctors, 'massages' => $massages, 'times' => $times]);
     }
 
     public function createMeeting(SessionRequest $request){
+
+
+        \Illuminate\Support\Facades\Session::flash('message', 'This is a message!');
+        \Illuminate\Support\Facades\Session::flash('alert-class', 'alert-danger');
 
 
         $session = new Session();
@@ -68,7 +74,7 @@ class MainController extends Controller
         $session->date = $request->get('date');
 
         if($session->date < Carbon::today()->toDateString()){
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Select current or future date');
         }
 
         $time = Time::where('id', $session->time_id)->first();

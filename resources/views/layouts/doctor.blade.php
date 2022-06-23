@@ -7,10 +7,6 @@
             <th>Value</th>
         </tr>
         <tr>
-            <td>Id</td>
-            <td>{{$doctor->id}}</td>
-        </tr>
-        <tr>
             <td>Name</td>
             <td>{{$doctor->name}}</td>
         </tr>
@@ -20,7 +16,7 @@
         </tr>
         <tr>
             <td>Exp</td>
-            <td>{{$doctor->exp}}</td>
+            <td>{{$doctor->exp}} {{Str::plural('year', $doctor->exp )}}</td>
         </tr>
         <tr>
             <td>Image</td>
@@ -30,7 +26,9 @@
             <td>@if(! \Illuminate\Support\Facades\Auth::user()->hasLikedDoctor($doctor))
                     <a href="{{route('doctor.like', $doctor->id)}}" class="like">Like</a>
                 @else
-                    <a href="{{route('doctor.unlike', $doctor->id)}}" class="like">Unlike</a>
+                    @if(\Illuminate\Support\Facades\Auth::user()->isAdmin())
+                    <a href="{{route('doctor.unlike', $doctor->id)}}" class="like">Remove likes</a>
+                    @endif
                 @endif</td>
             <td><p>{{$doctor->likes->count()}} {{Str::plural('like', $doctor->likes->count() )}}</p></td>
 
