@@ -7,9 +7,6 @@
     <form method="post" action="{{route('meeting.create')}}">
         @csrf
 
-        @if(Session::has('message'))
-            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-        @endif
         <input type="hidden" name="user_id" id="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
 
         @error('doctor')
@@ -34,25 +31,26 @@
                 @endforeach
             </select>
 
+        @if(Session::has('message'))
+            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
+
         @error('date')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
             <p>Select date</p>
-        <input type="date" id="date" name="date" class="form-control" value="{{\Carbon\Carbon::today()}}">
+        <input type="date" id="date" name="date" class="form-control" value="{{\Carbon\Carbon::today('Europe/Kiev')->toDateString()}}">
 
         @error('time')
         <div class="alert alert-danger">{{$message}}</div>
         @enderror
         @if(count($times) != 0)
+
             <p>Select time</p>
             <select name="time" id="time" class="form-control mt-2">
-
                 @foreach($times as $time)
-
-
                         <option
                             value="{{$time->id}}">{{\Carbon\Carbon::createFromFormat('H:i:s', $time->time)->format('h:i A')}}</option>
-
                 @endforeach
             </select>
 

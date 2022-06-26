@@ -24,48 +24,39 @@ class MainController extends Controller
     {
         $now = Carbon::now('Europe/Kiev');
 
-        $times = Time::all();
-
-        foreach ($times as $time){
-            $time->is_banned = 0;
-            $time->save();
-        }
-
-        $ban_times = Time::all();
-        foreach ($ban_times as $time ){
-            if ($time->time < $now->toTimeString()){
-                $time->is_banned=1;
-                $time->save();
-            }
-        }
-
         $sessions =  Session::all();
         foreach ($sessions as $session){
-            if($session->date < $now->toDateString() && $session->time->time < $now->toTimeString() && $session->isDone()){
+            if ($session ->date < $now or ($session ->date < $now->toDateString() && $session ->time->time < $now->toTimeString())){
                 $time = Time::where('id', $session->time_id)->first();
                 $time->is_banned = 0;
                 $time->save();
             }
         }
 
+        $ban_times = Time::all();
+        foreach ($ban_times as $time ){
+            if ($time->time < $now->toTimeString() )
+                $time->is_banned=1;
+            $time->save();
+        }
+
         $doctors = Doctor::get();
-        $time = Carbon::now('Europe/Kiev');
-//        dd($time->toTimeString());
         $massages = Massage::get();
 
         $times = Time::where('is_banned', 0)->get();
+
 
         return view('meeting', ['doctors' => $doctors, 'massages' => $massages, 'times' => $times]);
     }
 
     public function createMeeting(SessionRequest $request){
 
-
-        \Illuminate\Support\Facades\Session::flash('message', 'This is a message!');
-        \Illuminate\Support\Facades\Session::flash('alert-class', 'alert-danger');
-
+        \Illuminate\Support\Facades\Session::flash('message', '');
+        \Illuminate\Support\Facades\Session::flash('alert-class', 'alert-danger mt-2');
 
         $session = new Session();
+
+        $now = Carbon::now('Europe/Kiev');
 
         $session->user_id = Auth::user()->id;
         $session->doctor_id = $request->get('doctor');
@@ -77,19 +68,25 @@ class MainController extends Controller
             return redirect()->back()->with('message', 'Select current or future date');
         }
 
+        $Weekend = new Carbon($session->date);
+        if($Weekend->isWeekend()){
+            return redirect()->back()->with('message', 'Select weekday date');
+        }
+
+        if ($session->date == Carbon::today()->toDateString()){
+            $times = Time::all();
+            foreach ($times as $time){
+                if ($time->time < $now->toTimeString())
+                    $time->is_banned=1;
+                $time->save();
+            }
+            return redirect()->back();
+        }
+
         $time = Time::where('id', $session->time_id)->first();
         $time->is_banned = 1;
-        $session->save();
         $time->save();
-
+        $session->save();
         return redirect()->route('profile.index', Auth::user());
-    }
-
-    public function newDay(){
-        $times = Time::all();
-        foreach ($times as $time){
-            $time->is_banned = 0;
-            $time->save();
-        }
     }
 }
